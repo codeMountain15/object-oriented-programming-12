@@ -5,7 +5,7 @@
 using namespace std;
 
 int multiply(int m) {
-    if (m - 1 > 0) {
+    if (m > 1) {
         return m * multiply(m - 1);
     }
     else {
