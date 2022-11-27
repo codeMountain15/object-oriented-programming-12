@@ -1,34 +1,52 @@
 // recursion02a.cpp
-//
+// with vectors
 
 #include <iostream>
+#include <vector>
 using namespace std;
 
 class FamilyNameLine {
 protected:
     string name;
     string birthyear;
-    FamilyNameLine* successor;
+    vector<FamilyNameLine*> successors;
 
 public:
-    FamilyNameLine(string in1, string in2, FamilyNameLine* in3 = NULL) : name(in1), birthyear(in2), successor(in3) {};
+    FamilyNameLine(string in1, string in2) : name(in1), birthyear(in2) {};
+    FamilyNameLine(string in1, string in2, vector<FamilyNameLine*> in3) : name(in1), birthyear(in2), successors(in3) {};
 
     friend void show_successors(FamilyNameLine*);
 };
 
 void show_successors(FamilyNameLine* ancestor) {
-    //cout << ancestor->name << "'s birthdate is: " << ancestor->birthyear << endl;
-    if (ancestor->successor != NULL) {
-        show_successors(ancestor->successor);
-    }
+    
     cout << ancestor->name << "'s birthdate is: " << ancestor->birthyear << endl; // reverse typing
+
+    if (!ancestor->successors.empty()) {
+        for (auto i = (ancestor->successors).begin(); i != (ancestor->successors).end(); ++i)
+        show_successors(*i);
+    }
 }
 
 int main() {
-    FamilyNameLine s3("Takis", "2009");
-    FamilyNameLine s2("Mairy", "1988", &s3);
-    FamilyNameLine s1("Sisi", "1988", &s2);
-    FamilyNameLine s0("Mairy", "1960", &s1);
+    vector<FamilyNameLine*> temp1;
+    vector<FamilyNameLine*> temp2;
+    vector<FamilyNameLine*> temp3;
+
+    FamilyNameLine s4("Takis", "2009");
+    temp1.push_back(&s4);
+    FamilyNameLine s3("Peter", "2011");
+    temp1.push_back(&s3);
+
+    FamilyNameLine s2a("Kate", "1989");
+    FamilyNameLine s2b("John", "1986", temp1);
+    temp2.push_back(&s2a);
+    temp2.push_back(&s2b);
+
+    FamilyNameLine s1("Sisi", "1988", temp2);
+    temp3.push_back(&s1);
+
+    FamilyNameLine s0("Mairy", "1960", temp3);
 
     show_successors(&s0);
 
