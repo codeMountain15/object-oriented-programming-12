@@ -7,12 +7,10 @@ using namespace std;
 int fibonacci(int input) {
     if ((input == 1) || (input == 0)) {
         return(input);
-    }
-    else {
-        return(fibonacci(input - 1) + fibonacci(input - 2));
+    } else {
+       return(fibonacci(input - 1) + fibonacci(input - 2));
     }
 }
-
 int main() {
     int x, i = 0;
     
@@ -24,7 +22,7 @@ int main() {
 
     cout << "The Fibonnaci list of integers: ";
         while (i < x) {
-            cout << ", " << fibonacci(i);
+            cout << endl << fibonacci(i);
             i++;
         }
 
