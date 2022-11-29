@@ -25,9 +25,9 @@ void show_successors(FamilyNameLine* ancestor) {
 }
 
 int main() {
-    FamilyNameLine s3("Takis", "2009");
-    FamilyNameLine s2("Mairy", "1988", &s3);
-    FamilyNameLine s1("Sisi", "1988", &s2);
+    FamilyNameLine s3("Takis", "2020");
+    FamilyNameLine s2("Mairy", "1998", &s3);
+    FamilyNameLine s1("Sisi", "1978", &s2);
     FamilyNameLine s0("Mairy", "1960", &s1);
 
     show_successors(&s0);
